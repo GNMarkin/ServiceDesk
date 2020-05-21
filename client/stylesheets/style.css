@@ -1,0 +1,14 @@
+/* Сброс настроек отступа */
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    padding: 13px 0 13px 0;
+    border-bottom: 5px solid #FEC804;
+    color: #FEC804;
+    background: #333333;
+    font-size: 30px;
+}
