@@ -12,3 +12,16 @@ header {
     background: #2f2f33;
     font-size: 30px;
 }
+
+.leftPanel {
+    width: 200px;
+    padding: 10px 0px 0px 5px;
+    background: #2f2f33;
+    color: white;
+    float: left;
+}
+
+.workPanel {
+    padding: 10px 0 0 210px;
+    background: #f0f0f0;
+}
