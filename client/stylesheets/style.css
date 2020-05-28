@@ -39,6 +39,34 @@ a {
     display: block;
     margin-left: 10px;
     padding: 11px 48px 11px 0px;
+    line-height: 20px;
+}
+
+span {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+    color: #fff;
+    margin: 0 8px;
+    float: left;
+}
+.icon-files-empty {
+    color: #FEC40E;
+}
+.icon-database {
+    color: rgb(2, 192, 192)
+}
+.icon-users {
+    color: #FD7E01;
+}
+.icon-truck {
+    color: #BABAB8;
+}
+.icon-envelope {
+    color: #8696AE;
+}
+.icon-stats-dots {
+    color: #00DB00;
 }
 
 /* Стили основной рабочей области */
