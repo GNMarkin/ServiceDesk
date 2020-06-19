@@ -1,19 +1,36 @@
+"use strict";
+
 let express = require("express"),
-    app = express();
+    app = express(),
+    mongoose = require("mongoose");
 
-//подгружаем список заявок
-let orders = require("./orders.json");
+//подключаемся к хранилищу данных ServiceDesk
+mongoose.connect('mongodb://localhost/sd');
+//Определяем схему и модель списка заявок
+let OrderSchema = mongoose.Schema({ order: String }),
+    Order = mongoose.model("Order", OrderSchema);
 
+//запускаем сервер web сервер
 app.use(express.static(__dirname + "/client"));
 app.use(express.urlencoded({ extended: true }));
 app.listen(3000);
 
+//определяем пути запросов
 app.get("/getOrders", function (req, res) {
-    res.json(orders);
+    Order.find({}, function (err, orders) {
+        //TODO: 200619-1457 добавить функцию отработки ошибок
+        res.json(orders);
+    });
 });
 app.post("/postOrder", function (req, res) {
-    console.log(req.body.newOrder);
-    orders.push(req.body.newOrder);
+    let newOrder = new Order({ "order": req.body.newOrder });
+    newOrder.save(function (err, result) {
+        if (err !== null) {
+            //TODO: 200619-1458 добавить функцию отработки ошибок
+            console.log(err);
+        };
+    });
+
 });
 
 console.log(new Date().getMinutes());

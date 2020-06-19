@@ -10,9 +10,9 @@ $(".addOrder").on("click", function () {
 });
 
 function getAllOrders() {
-    $.getJSON("/getOrders", function (orderObject) {
-        let $orderList = $(".orderList");
-        $orderList.empty();
-        orderObject.forEach(order => $orderList.append($("<li>").text(order)));
+    $.getJSON("/getOrders", function (ordersList) {
+        let $ordersList = $(".ordersList");
+        $ordersList.empty();
+        ordersList.forEach(order => $ordersList.append($("<li>").text(order.order)));
     });
 };
