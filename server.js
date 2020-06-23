@@ -7,7 +7,7 @@ let express = require("express"),
 //подключаемся к хранилищу данных ServiceDesk
 mongoose.connect('mongodb://localhost/sd', { useNewUrlParser: true, useUnifiedTopology: true });
 //Определяем схему и модель списка заявок
-let OrderSchema = mongoose.Schema({ order: String }),
+let OrderSchema = mongoose.Schema({ description: String }),
     Order = mongoose.model("Order", OrderSchema);
 
 //запускаем сервер web сервер
@@ -23,7 +23,7 @@ app.get("/getOrders", function (req, res) {
     });
 });
 app.post("/postOrder", function (req, res) {
-    let newOrder = new Order({ "order": req.body.newOrder });
+    let newOrder = new Order({ "description": req.body.newOrder });
     newOrder.save(function (err, result) {
         if (err !== null) {
             //TODO: 200619-1458 добавить функцию отработки ошибок

@@ -11,5 +11,5 @@ $(".addOrder").on("click", function () {
 function showOrders(ordersList) {
     let $ordersList = $(".ordersList");
     $ordersList.empty();
-    ordersList.forEach(order => $ordersList.append($("<li>").text(order.order)));
+    ordersList.forEach(order => $ordersList.append($("<li>").text(order.description)));
 };
