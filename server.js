@@ -28,7 +28,12 @@ app.post("/postOrder", function (req, res) {
         if (err !== null) {
             //TODO: 200619-1458 добавить функцию отработки ошибок
             console.log(err);
-        };
+        } else {
+            Order.find({}, function (err, orders) {
+                //TODO: 200619-1457 добавить функцию отработки ошибок
+                res.json(orders);
+            });
+        }
     });
 
 });

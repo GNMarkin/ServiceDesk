@@ -1,18 +1,15 @@
 "use strict";
 
-getAllOrders();
+$.getJSON("/getOrders", ordersList => showOrders(ordersList));
 
 $(".addOrder").on("click", function () {
     let newOrder = prompt("Новая заявка");
     if ((newOrder === "") || (newOrder === null)) return;
-    $.post("postOrder", { newOrder });
-    getAllOrders();
+    $.post("postOrder", { newOrder }, ordersList => showOrders(ordersList));
 });
 
-function getAllOrders() {
-    $.getJSON("/getOrders", function (ordersList) {
-        let $ordersList = $(".ordersList");
-        $ordersList.empty();
-        ordersList.forEach(order => $ordersList.append($("<li>").text(order.order)));
-    });
+function showOrders(ordersList) {
+    let $ordersList = $(".ordersList");
+    $ordersList.empty();
+    ordersList.forEach(order => $ordersList.append($("<li>").text(order.order)));
 };
