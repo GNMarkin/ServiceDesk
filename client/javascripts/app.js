@@ -1,11 +1,11 @@
 "use strict";
 
-$.getJSON("/getOrders", ordersList => showOrders(ordersList));
+$.post("/getOrders", {}, ordersList => showOrders(ordersList));
 
 $(".addOrder").on("click", function () {
     let newOrder = prompt("Новая заявка");
     if ((newOrder === "") || (newOrder === null)) return;
-    $.post("postOrder", { newOrder }, ordersList => showOrders(ordersList));
+    $.post("/addOrder", { newOrder }, ordersList => showOrders(ordersList));
 });
 
 function showOrders(ordersList) {

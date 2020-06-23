@@ -16,27 +16,26 @@ app.use(express.urlencoded({ extended: true }));
 app.listen(3000);
 
 //определяем пути запросов
-app.get("/getOrders", function (req, res) {
-    Order.find({}, function (err, orders) {
-        //TODO: 200619-1457 добавить функцию отработки ошибок
-        res.json(orders);
-    });
-});
-app.post("/postOrder", function (req, res) {
+app.post("/getOrders", (req, res) => getOrders(res));
+app.post("/addOrder", function (req, res) {
     let newOrder = new Order({ "description": req.body.newOrder });
     newOrder.save(function (err, result) {
         if (err !== null) {
             //TODO: 200619-1458 добавить функцию отработки ошибок
             console.log(err);
         } else {
-            Order.find({}, function (err, orders) {
-                //TODO: 200619-1457 добавить функцию отработки ошибок
-                res.json(orders);
-            });
+            getOrders(res);
         }
     });
 
 });
+
+function getOrders(res){
+    Order.find({}, function (err, orders) {
+        //TODO: 200619-1457 добавить функцию отработки ошибок
+        res.json(orders);
+    });
+};
 
 //для мониторинга перезагрузки сервера
 console.log(new Date().getHours() + ":" + new Date().getMinutes());
