@@ -5,7 +5,7 @@ let express = require("express"),
     mongoose = require("mongoose");
 
 //подключаемся к хранилищу данных ServiceDesk
-mongoose.connect('mongodb://localhost/sd');
+mongoose.connect('mongodb://localhost/sd', { useNewUrlParser: true, useUnifiedTopology: true });
 //Определяем схему и модель списка заявок
 let OrderSchema = mongoose.Schema({ order: String }),
     Order = mongoose.model("Order", OrderSchema);
@@ -33,4 +33,5 @@ app.post("/postOrder", function (req, res) {
 
 });
 
-console.log(new Date().getMinutes());
+//для мониторинга перезагрузки сервера
+console.log(new Date().getHours() + ":" + new Date().getMinutes());
