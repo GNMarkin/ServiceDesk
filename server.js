@@ -4,11 +4,12 @@ let express = require("express"),
     app = express(),
     mongoose = require("mongoose");
 
+//подключаем схемы базы данных    
+let Order = require("./client/models/order.js"); //определяем схему и модель списка заявок
+
 //подключаемся к хранилищу данных ServiceDesk
 mongoose.connect('mongodb://localhost/sd', { useNewUrlParser: true, useUnifiedTopology: true });
-//Определяем схему и модель списка заявок
-let OrderSchema = mongoose.Schema({ description: String }),
-    Order = mongoose.model("Order", OrderSchema);
+
 
 //подключаем websocket
 let Static = require('node-static'),
