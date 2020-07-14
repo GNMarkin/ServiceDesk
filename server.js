@@ -9,28 +9,8 @@ let express = require("express"),
 mongoose.connect('mongodb://localhost/sd', { useNewUrlParser: true, useUnifiedTopology: true });
 
 
-//подключаем websocket
-let Static = require('node-static'),
-    WebSocketServer = new require('ws'),
-    clients = {}; //подключенные клиенты
-
-// WebSocket-сервер на порту 8081
-let webSocketServer = new WebSocketServer.Server({ port: 8081 });
-webSocketServer.on('connection', function (ws) {
-    let id = Math.random();
-    clients[id] = ws;
-    console.log("новое соединение " + id);
-
-    ws.on('message', function (message) {
-        console.log('получено сообщение ' + message);
-        for (let key in clients) {clients[key].send(message);}
-    });
-
-    ws.on('close', function () {
-        console.log('соединение закрыто ' + id);
-        delete clients[id];
-    });
-});
+//подключаем websocket для работы с клиентами в режиме онлайн 
+require("./websocket_server.js");
 
 
 //запускаем сервер web сервер
@@ -43,4 +23,4 @@ app.post("/getOrders", OrdersController.read);
 app.post("/addNewOrder", OrdersController.create);
 
 //для мониторинга перезагрузки сервера
-console.log(new Date().getHours() + ":" + new Date().getMinutes());
+console.log(new Date());

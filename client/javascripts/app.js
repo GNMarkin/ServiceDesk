@@ -1,7 +1,9 @@
 "use strict";
 
+//получить список заявок
 $.post("/getOrders", {}, ordersList => refreshOrders(ordersList));
 
+//добавить новую заявку
 $(".addNewOrder").on("click", function () {
     let newOrder = prompt("Новая заявка");
     if ((newOrder === "") || (newOrder === null)) return;
@@ -13,18 +15,20 @@ $(".addNewOrder").on("click", function () {
     });
 });
 
+//обновить список заявок
 function refreshOrders(ordersList) {
     let $ordersList = $(".ordersList");
     $ordersList.empty();
     ordersList.forEach(order => $ordersList.append($("<li>").text(order.description)));
 };
 
-if (!window.WebSocket) {
-    console.log('WebSocket в этом браузере не поддерживается.');
-};
-// создать подключение
+// проверяем поддержку WebSocket
+if (!window.WebSocket) {console.log('WebSocket в этом браузере не поддерживается.');};
+
+// создаем подключение
 let socket = new WebSocket("ws://192.168.64.129:8081");
-// обработчик входящих сообщений
+
+// слушаем входящие сообщения и обрабатываем их
 socket.onmessage = function (event) {
     //let incomingMessage = event.data;
     $.post("/getOrders", {}, ordersList => refreshOrders(ordersList));
