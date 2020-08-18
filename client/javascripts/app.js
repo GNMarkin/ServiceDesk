@@ -26,7 +26,8 @@ function refreshOrders(ordersList) {
 if (!window.WebSocket) {console.log('WebSocket в этом браузере не поддерживается.');};
 
 // создаем подключение
-let socket = new WebSocket("ws://192.168.64.129:8081");
+//TODO: получить текущий ip адрес сервера
+let socket = new WebSocket("ws://192.168.0.13:8081");
 
 // слушаем входящие сообщения и обрабатываем их
 socket.onmessage = function (event) {

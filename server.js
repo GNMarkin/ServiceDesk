@@ -3,7 +3,8 @@
 let express = require("express"),
     app = express(),
     mongoose = require("mongoose"),
-    OrdersController = require("./client/controllers/orders_controller.js");
+    OrdersController = require("./client/controllers/orders_controller.js"),
+    UploadData = require("./client/controllers/upload_controllers.js");
 
 //подключаемся к хранилищу данных ServiceDesk
 mongoose.connect('mongodb://localhost/sd', { useNewUrlParser: true, useUnifiedTopology: true });
@@ -21,6 +22,9 @@ app.listen(3000);
 //определяем маршруты
 app.post("/getOrders", OrdersController.read);
 app.post("/addNewOrder", OrdersController.create);
+
+//внесение информации в базу данных
+app.get("/uploadData", UploadData);
 
 //для мониторинга перезагрузки сервера
 console.log(new Date());
