@@ -26,8 +26,10 @@ header {
 
 /* Стили основной рабочей области */
 .workPanel {
-    padding: 10px 0 0 210px;
+    width: calc(100% - 200px);
+    padding-top: 10px;
     background: white;
+    float: right;
 }
 
 /* Стили подвала */
